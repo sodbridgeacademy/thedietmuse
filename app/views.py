@@ -43,6 +43,7 @@ def contact(request):
     # Validate contact form 
     if request.method == 'POST':
         fullname = request.POST['name']
+        print('fullname from contact: ', fullname)
         contact_email = request.POST['email']
         subject = request.POST['subject']
         message = request.POST['message']
