@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">FOOD RESERVATION</h4>
+        <form class="form-sample">
+          <p class="card-description">
+            Please, check the menu to know the meal for the day. Don't forget to<code>PRE-ORDER</code> a day before
+          </p>
+          <div class="row">
+            <div class="col-md-10">
+              <div class="form-group row">
+                <div class="col-sm-9">
+                  {{ form|crispy }}
+                  {% csrf_token %}
+                  <div class="text-center"><button class="btn btn-outline-primary" type="submit">Make an Order</button></div>
+                </div>
+              </div>
+            </div>                      
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

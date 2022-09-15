@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.core.mail import BadHeaderError, send_mail, EmailMessage
 from django.conf import settings
 from .models import *
+from django.views.generic import CreateView, ListView, DetailView
 
 # Create your views here.
 def index(request):
@@ -66,6 +67,12 @@ def contact(request):
         print('Mesage delivered!!!')
         return redirect('success')
     return render(request, 'app/index.html')
+
+
+# class FoodOrdersView(CreateView):
+#     model = FoodOrder
+#     fields = ['menu', 'date_needed', 'no_of_plates', 'message']
+
 
 def order_reservation(request):
     if request.method == 'POST':

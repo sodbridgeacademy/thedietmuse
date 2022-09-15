@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-f$3$=i63%@ddwkcnl8on5=vlm&wyeqo&8@!%6e0f3l(e1!j^fq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ '*']
 
 #gmail smtp
 EMAIL_HOST = 'smtp.gmail.com'
@@ -49,6 +49,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
+    'accounts',
+    'crispy_forms',
+    'datetimewidget',
 ]
 
 MIDDLEWARE = [
@@ -136,6 +139,12 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'BASE_DIR / media'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_URL = 'user-login'
+LOGOUT_URL = 'logout'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

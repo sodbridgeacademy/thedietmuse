@@ -1,0 +1,159 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Horizontal Two column</h4>
+                  <form class="form-sample">
+                    <p class="card-description">
+                      Personal info
+                    </p>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">First Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Your first name" value="{{ request.user.first_name }}" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Last Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Your last name" value="{{ request.user.last_name }}" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Gender</label>
+                          <div class="col-sm-9">
+                            <select class="form-control">
+                              <option>Male</option>
+                              <option>Female</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Date of Birth</label>
+                          <div class="col-sm-9">
+                            <input class="form-control" placeholder="dd/mm/yyyy" value="{{ request.user.profile.dob }}" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Category</label>
+                          <div class="col-sm-9">
+                            <select class="form-control">
+                              <option>Category1</option>
+                              <option>Category2</option>
+                              <option>Category3</option>
+                              <option>Category4</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Membership</label>
+                          <div class="col-sm-4">
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input type="text" placeholder="" value="{{ request.user.profile.subscribed_member }}">
+                                <!-- <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios1" value="" checked>
+                                Free -->
+                                {% if request.user.profile.subscribed_member == 'False' %}
+                                  <span style="color: red">Unsubscribed User</span>
+                                {% else %}
+                                  <span style="color: green;">Subscribed member</span>
+                                {% endif %}
+                              </label>
+                            </div>
+                          </div>
+                          <!-- <div class="col-sm-5">
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios2" value="option2">
+                                Professional
+                              </label>
+                            </div>
+                          </div> -->
+                        </div>
+                      </div>
+                    </div> <hr>
+
+                    <p class="card-description">
+                      Contact Info
+                    </p>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Street Address</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Your street address" value="{{ request.user.profile.street_address }}" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">City</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Your city" value="{{ request.user.profile.city }}" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">State</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Your state" value="{{ request.user.profile.state }}" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Phone no</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Your phone number" value="{{ request.user.profile.phone_no }}" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Nationality</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="Your nationality" value="{{ request.user.profile.nationality }}" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Date Joined</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="date joined" value="{{ request.user.profile.date_created }}" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+{% endblock content %}

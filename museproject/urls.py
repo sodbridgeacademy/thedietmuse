@@ -17,10 +17,19 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from accounts.views import UserRegistrationView, UserLoginView, dashboard, FoodOrdersCreateView, food_menu, order_history
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app.urls')),
-]
+    path('accounts/signup/', UserRegistrationView.as_view(), name='user-registration'),
+    path('accounts/login/', UserLoginView.as_view(), name='user-login'),
+    path('logout/', LogoutView.as_view(template_name='logout.html',next_page=None), name = 'logout'),
+    path('dashboard/',dashboard, name='dashboard'),
+    path('food-menu/',food_menu, name='food-menu'),
+    path('customer/order-history/',order_history, name='order-history'),
+    path('food-order/new/', FoodOrdersCreateView.as_view(template_name='make_order.html'), name='make-order'),
+    ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
