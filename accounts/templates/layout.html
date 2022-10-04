@@ -12,7 +12,10 @@
   <link rel="stylesheet" href="{% static 'vendors/ti-icons/css/themify-icons.css' %} ">
   <link rel="stylesheet" href="{% static 'vendors/base/vendor.bundle.base.css' %}">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" />
+<!--   <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" /> -->
+    <!-- Favicons -->
+  <link href="{% static 'images/dietmusenew.png' %}" rel="icon">
+  <link href="{% static 'images/dietmusenew.png' %}" rel="apple-touch-icon">
 </head>
 
 <body>
@@ -21,8 +24,8 @@
 
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo me-5" href="{% url 'index' %}"><img src="../../images/logo.svg" class="me-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="{% url 'index' %}"><img src="../../images/logo-mini.svg" alt="logo"/></a>
+        <a class="navbar-brand brand-logo me-5" href="{% url 'index' %}"><img style="width: ;"  src="{% static 'images/dietmusenew.png' %}" class="me-2" alt="logos"/></a>
+<!--         <a class="navbar-brand brand-logo-mini" href="{% url 'index' %}"><img src="{% static 'images/dietmusenew.png' %}" alt="logo"/></a> -->
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -41,7 +44,7 @@
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
-          <li class="nav-item dropdown me-1">
+<!--           <li class="nav-item dropdown me-1">
             <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-bs-toggle="dropdown">
               <i class="ti-email mx-0"></i>
             </a>
@@ -49,7 +52,7 @@
               <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
               <a class="dropdown-item">
                 <div class="item-thumbnail">
-                    <img src="../../images/faces/face4.jpg" alt="image" class="profile-pic">
+                    <img src="{% static 'app/images/faces/face4.jpg' %}" alt="image" class="profile-pic">
                 </div>
                 <div class="item-content flex-grow">
                   <h6 class="ellipsis font-weight-normal">David Grey
@@ -61,10 +64,11 @@
               </a>
               
             </div>
-          </li>
+          </li> -->
+          <li class="nav-item">Hello {{ request.user.username }}</li>
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
-              <img src="../../images/faces/face28.jpg" alt="profile"/>
+              <img src="{{ request.user.profile.photo.url }}", alt="profile_picture">
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item">
@@ -116,7 +120,16 @@
               <span class="menu-title">View Menu</span>
             </a>
           </li>
+          {% if request.user.username == 'gabby' %}
           <li class="nav-item">
+            
+            <a class="nav-link" href="{% url 'view-orders' %}">
+              <i class="ti-package menu-icon"></i>
+              <span class="menu-title">Customer Orders</span>
+            </a>
+          </li>
+            {% else %}
+           <li class="nav-item">
             <a class="nav-link" href="{% url 'make-order' %}">
               <i class="ti-package menu-icon"></i>
               <span class="menu-title">Make an order</span>
@@ -128,6 +141,8 @@
               <span class="menu-title">Order History</span>
             </a>
           </li>
+          {% endif %}
+          
           <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">
               <i class="ti-angle-double-right menu-icon"></i>
@@ -143,6 +158,8 @@
           <div class="row">
 
             {% block content %} {% endblock content %}
+
+            {% include "pagination.html" with page=customer_orders %}
 
           </div>
 

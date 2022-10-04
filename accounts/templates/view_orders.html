@@ -7,10 +7,10 @@
   <div class="col-12 grid-margin">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">RESTAURANT MENU</h4>
+        <h4 class="card-title">CUSTOMER FOOD ORDERS</h4>
         <form class="form-sample">
           <p class="card-description">
-            Your most recent orders are displayed here. Click the menu for more details. Thank you.
+            Your customers' recent orders are displayed here. Click the menu for more details. Thank you.
           </p>
           <div class="row">
 
@@ -39,6 +39,9 @@
                             Cost
                           </th>
                           <th>
+                            Customer
+                          </th>
+                          <th>
                             Order date
                           </th>
                         </tr>
@@ -59,6 +62,9 @@
                           </td>
                           <td>
                             N{{ history.menu.price }}
+                          </td>
+                          <td>
+                            {{ history.user }}
                           </td>
                           <td>
                             {{ history.date_created }}

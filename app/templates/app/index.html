@@ -13,8 +13,8 @@
   <meta name="author" content="Damilare Samuel - Sodbridge Solutions">
 
   <!-- Favicons -->
-  <link href="{% static 'assets/img/thedietmuse_logo.png' %}" rel="icon">
-  <link href="{% static 'assets/img/thedietmuse_logo.jpeg' %}" rel="apple-touch-icon">
+  <link href="{% static 'images/dietmusenew.png' %}" rel="icon">
+  <link href="{% static 'images/dietmusenew.png' %}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -54,9 +54,9 @@
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-cente">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
-      <span class="logo me-auto me-md-0"><a href="{% url 'index' %}">The Diet Muse</a></span>
+      <!-- <span class="logo me-auto me-md-0"><a href="{% url 'index' %}">The Diet Muse</a></span> -->
         <!-- Uncomment below if you prefer to use an image logo -->
-      <!--  <a href="{% url 'index' %}" class="logo me-auto me-lg-0"><img src="{% static 'assets/img/thedietmuse_logo.jpeg' %}" style="height:; width:;" alt="Logo" class="img-fluid"></a> -->
+       <a href="{% url 'index' %}" class="logo me-auto me-lg-0"><img src="{% static 'images/dietmusenew-removebg-preview.png' %}" style="height:; width:;" alt="Logo" class="img-fluid"></a>
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
@@ -171,13 +171,12 @@
     <!-- ======= Menu Section ======= -->
     <section id="menu" class="menu section-bg">
       <div class="container" data-aos="fade-up">
-
         <div class="section-title">
           <h2>Menu</h2>
           <p>Check Our Tasty Menu</p>
         </div>
 
-        <div class="row" data-aos="fade-up" data-aos-delay="100">
+        <!-- <div class="row" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-12 d-flex justify-content-center">
             <ul id="menu-flters">
               <li data-filter="*" class="filter-active">All</li>
@@ -186,103 +185,22 @@
               <li data-filter=".filter-specialty">Specialty</li>
             </ul>
           </div>
-        </div>
-
+        </div> -->
         <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
-
+          {% for menu in food_menu %}
           <div class="col-lg-6 menu-item filter-starters">
             <img src="{% static 'assets/img/menu/lobster-bisque.jpg' %}" class="menu-img" alt="">
             <div class="menu-content">
-              <a href="#">Lobster Bisque</a><span>$5.95</span>
+              <a href="#">{{ menu.name }}</a><span>N{{ menu.price }}</span>
             </div>
             <div class="menu-ingredients">
-              Lorem, deren, trataro, filede, nerada
+              {{ menu.category }}
             </div>
           </div>
-
-          <div class="col-lg-6 menu-item filter-specialty">
-            <img src="assets/img/menu/bread-barrel.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Bread Barrel</a><span>$6.95</span>
-            </div>
-            <div class="menu-ingredients">
-              Lorem, deren, trataro, filede, nerada
-            </div>
-          </div>
-
-          <div class="col-lg-6 menu-item filter-starters">
-            <img src="assets/img/menu/cake.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Crab Cake</a><span>$7.95</span>
-            </div>
-            <div class="menu-ingredients">
-              A delicate crab cake served on a toasted roll with lettuce and tartar sauce
-            </div>
-          </div>
-
-          <div class="col-lg-6 menu-item filter-salads">
-            <img src="assets/img/menu/caesar.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Caesar Selections</a><span>$8.95</span>
-            </div>
-            <div class="menu-ingredients">
-              Lorem, deren, trataro, filede, nerada
-            </div>
-          </div>
-
-          <div class="col-lg-6 menu-item filter-specialty">
-            <img src="assets/img/menu/tuscan-grilled.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Tuscan Grilled</a><span>$9.95</span>
-            </div>
-            <div class="menu-ingredients">
-              Grilled chicken with provolone, artichoke hearts, and roasted red pesto
-            </div>
-          </div>
-
-          <div class="col-lg-6 menu-item filter-starters">
-            <img src="assets/img/menu/mozzarella.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Mozzarella Stick</a><span>$4.95</span>
-            </div>
-            <div class="menu-ingredients">
-              Lorem, deren, trataro, filede, nerada
-            </div>
-          </div>
-
-          <div class="col-lg-6 menu-item filter-salads">
-            <img src="assets/img/menu/greek-salad.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Greek Salad</a><span>$9.95</span>
-            </div>
-            <div class="menu-ingredients">
-              Fresh spinach, crisp romaine, tomatoes, and Greek olives
-            </div>
-          </div>
-
-          <div class="col-lg-6 menu-item filter-salads">
-            <img src="assets/img/menu/spinach-salad.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Spinach Salad</a><span>$9.95</span>
-            </div>
-            <div class="menu-ingredients">
-              Fresh spinach with mushrooms, hard boiled egg, and warm bacon vinaigrette
-            </div>
-          </div>
-
-          <div class="col-lg-6 menu-item filter-specialty">
-            <img src="assets/img/menu/lobster-roll.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Lobster Roll</a><span>$12.95</span>
-            </div>
-            <div class="menu-ingredients">
-              Plump lobster meat, mayo and crisp lettuce on a toasted bulky roll
-            </div>
-          </div>
-
+          {% endfor %}
         </div>
-
       </div>
+     </div>
     </section><!-- End Menu Section -->
 
     <!-- ======= Specials Section ======= -->
@@ -701,7 +619,7 @@
               <div class="email">
                 <i class="bi bi-envelope"></i>
                 <h4>Email:</h4>
-                <p><a href="mailto: hello@thedietmuse.com">hello@thedietmuse.com</a></p>
+                <p><a href="mailto: bookthedietmuse@gmail.com">bookthedietmuse@gmail.com</a></p>
               </div>
 
               
@@ -805,7 +723,7 @@
               <p>
                 
                 <strong>Phone:</strong>+234 810 055 0674<br><br>
-                <strong>Email:</strong> <a href="mailto: hello@thedietmuse.com">hello@thedietmuse.com</a><br>
+                <strong>Email:</strong> <a href="mailto: bookthedietmuse@gmail.com">bookthedietmuse@gmail.com</a><br>
               </p>
               <div class="social-links mt-3">
                 <a href="https://www.twitter.com/thedietmuse" class="twitter"><i class="bx bxl-twitter"></i></a>
@@ -824,7 +742,7 @@
               <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#about">About us</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#specials">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Track Order</a></li>
+              <li><i class="bx bx-chevron-right"></i><a href="{% url 'user-login' %}">Track Order</a></li>
 <!--               <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li> -->
             </ul>
           </div>

@@ -8,12 +8,13 @@ from django.views.generic import CreateView, ListView, DetailView
 def index(request):
     events = Event.objects.all()
     specials = Specials.objects.all()
+    food_menu = Food.objects.all()
+    
     if request.method == 'POST':
         fullname = request.POST['name']
         contact_email = request.POST['email']
         subject = request.POST['subject']
         message = request.POST['message']
-
         print('message from contact form:', message)
     
         # Extra email details
@@ -34,6 +35,7 @@ def index(request):
     context = {
         'events':events,
         'specials':specials,
+        'food_menu':food_menu,
     }
     return render(request, 'app/index.html', context)
 

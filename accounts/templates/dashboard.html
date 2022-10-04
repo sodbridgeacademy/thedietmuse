@@ -18,7 +18,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">First Name</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="Your first name" value="{{ request.user.first_name }}" />
+                            <div class="form-control" placeholder="Your first name">{{ request.user.first_name }}</div>
                           </div>
                         </div>
                       </div>
@@ -26,7 +26,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Last Name</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="Your last name" value="{{ request.user.last_name }}" />
+                            <div class="form-control" placeholder="Your last name">{{ request.user.last_name }}</div>
                           </div>
                         </div>
                       </div>
@@ -36,10 +36,11 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Gender</label>
                           <div class="col-sm-9">
-                            <select class="form-control">
-                              <option>Male</option>
-                              <option>Female</option>
-                            </select>
+                            {% if request.user.profile.gender == 'Male' %}
+                              <div class="readonly form-control" style="color:blue" value="Male">Male</div>
+                                {% else %}
+                                  <div class="form-control" style="color:pink">Female</div>
+                                {% endif %}
                           </div>
                         </div>
                       </div>
@@ -47,13 +48,13 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Date of Birth</label>
                           <div class="col-sm-9">
-                            <input class="form-control" placeholder="dd/mm/yyyy" value="{{ request.user.profile.dob }}" />
+                            <div class="form-control" placeholder="dd/mm/yyyy">{{ request.user.profile.dob }} </div>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-6">
+                      <!-- <div class="col-md-6">
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Category</label>
                           <div class="col-sm-9">
@@ -65,14 +66,14 @@
                             </select>
                           </div>
                         </div>
-                      </div>
+                      </div> -->
                       <div class="col-md-6">
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Membership</label>
                           <div class="col-sm-4">
                             <div class="form-check">
                               <label class="form-check-label">
-                                <input type="text" placeholder="" value="{{ request.user.profile.subscribed_member }}">
+                                <div placeholder="" value="{{ request.user.profile.subscribed_member }}">
                                 <!-- <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios1" value="" checked>
                                 Free -->
                                 {% if request.user.profile.subscribed_member == 'False' %}
@@ -103,7 +104,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Street Address</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="Your street address" value="{{ request.user.profile.street_address }}" />
+                            <div class="form-control" placeholder="Your street address">{{ request.user.profile.street_address }}</div>
                           </div>
                         </div>
                       </div>
@@ -111,7 +112,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">City</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="Your city" value="{{ request.user.profile.city }}" />
+                            <div class="form-control" placeholder="Your city">{{ request.user.profile.city }}</div>
                           </div>
                         </div>
                       </div>
@@ -121,7 +122,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">State</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="Your state" value="{{ request.user.profile.state }}" />
+                            <div class="form-control" placeholder="Your state">{{ request.user.profile.state }}</div>
                           </div>
                         </div>
                       </div>
@@ -129,7 +130,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Phone no</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="Your phone number" value="{{ request.user.profile.phone_no }}" />
+                            <div class="form-control" placeholder="Your phone number">{{ request.user.profile.phone_no }}</div>
                           </div>
                         </div>
                       </div>
@@ -139,7 +140,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Nationality</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="Your nationality" value="{{ request.user.profile.nationality }}" />
+                            <div class="form-control" placeholder="Your nationality">{{ request.user.profile.nationality }}</div>
                           </div>
                         </div>
                       </div>
@@ -147,9 +148,13 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Date Joined</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="date joined" value="{{ request.user.profile.date_created }}" />
+                            <div class="form-control" placeholder="date joined">{{ request.user.profile.date_created }}</div>
                           </div>
                         </div>
+                      </div>
+                      <hr>
+                      <div class="col-md-6">
+                       <a class="btn btn-primary" href="{% url 'profile-update' %}">Click To Update</a>
                       </div>
                     </div>
                   </form>

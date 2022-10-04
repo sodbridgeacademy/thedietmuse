@@ -54,9 +54,17 @@
                           </td>
                           <td class="py-1">
                             <img src="{% static 'images/faces/face1.jpg' %}" alt="image"/>
+<!--  -->
                           </td>
-                          <td>
-                            {{ menu.name }}
+
+                          
+                            {% if request.user.username == 'gabby' %}
+                              <td>
+                                <a href="{% url 'menu-update' menu.pk %}">{{ menu.name }}</a>
+                              </td>
+                            {% else %}
+                              <td>{{ menu.name }}</td>      
+                            {% endif %}
                           </td>
                           <td>
                             {{ menu.category }}
@@ -80,6 +88,7 @@
                   </div>
                 </div>
               </div>
+
             </div>
                  
           </div>

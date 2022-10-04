@@ -12,7 +12,7 @@ class OrderForm(ModelForm):
 		Model = FoodOrder
 		fields = ['menu', 'date_needed', 'no_of_plates', 'message', 'delivery_address']
 		#fields = '__all__'
-		#exclude = ('user', 'menu',)
+		exclude = ('user', 'menu',)
 		widgets = {
             #Use localization and bootstrap 3
             'datetime': DateTimeWidget(attrs={'id':"yourdatetimeid"}, usel10n = True, bootstrap_version=3)

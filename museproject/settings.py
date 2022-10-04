@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-f$3$=i63%@ddwkcnl8on5=vlm&wyeqo&8@!%6e0f3l(e1!j^fq
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['thedietmuse.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['thedietmuse.herokuapp.com', 'localhost', '127.0.0.1']
 
 #gmail smtp
 # EMAIL_HOST = 'smtp.gmail.com'
@@ -49,8 +49,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app',
+    
     'accounts',
+    'app',
     'crispy_forms',
     'datetimewidget',
 ]
@@ -134,8 +135,8 @@ USE_TZ = True
 
 
 STATIC_URL = 'static/'
-STATIC_ROOT = 'BASE_DIR / static_files'
-#STATICFILES_DIR = 'BASE_DIR /static/'
+STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_DIR = [ BASE_DIR / "static/"]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
