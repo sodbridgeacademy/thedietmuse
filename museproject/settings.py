@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     
     'accounts',
     'app',
-    'crispy_forms',
+    #'crispy_forms',
     'datetimewidget',
 ]
 
