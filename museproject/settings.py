@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-f$3$=i63%@ddwkcnl8on5=vlm&wyeqo&8@!%6e0f3l(e1!j^fq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['thedietmuse.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*', 'thedietmuse.herokuapp.com', 'localhost', '127.0.0.1']
 
 #gmail smtp
 # EMAIL_HOST = 'smtp.gmail.com'
