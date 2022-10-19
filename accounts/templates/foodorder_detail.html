@@ -62,6 +62,9 @@
                           <td>
                             {% if request.user.username == 'gabby' %}
                               <a href="{% url 'confirm-payment' object.pk %}" class="btn btn-block btn-primary">Confirm Payment</a>
+                            {% endif %}
+                            {% if object.payment_status == 'Received' %}
+                              Payment Received
                             {% else %}
                               <a href="https://paystack.com/pay/thedietmuse" target="_blank" class="btn btn-block btn-primary">Proceed to payment</a>
                             {% endif %}

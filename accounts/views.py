@@ -27,7 +27,7 @@ class UserRegistrationView(CreateView):
 
 
 class UserLoginView(LoginView):
-	 template_name = 'user_login.html'
+	 template_name = 'login.html'
 
 @login_required
 def dashboard(request):
@@ -35,7 +35,7 @@ def dashboard(request):
 	print('current_user from dashboard:', current_user.first_name)
 	food_menu = Food.objects.all()
 	context = {'food_menu': food_menu, 'current_user':current_user}
-	return render(request, 'dashboard.html', context)
+	return render(request, 'customer_dashboard.html', context)
 
 @login_required
 def view_orders(request):

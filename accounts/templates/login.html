@@ -1,0 +1,56 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>The Diet Muse|Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous">
+  <style>
+  .login{
+    background: url("/static/images/dietmusenew.png");  
+    background-repeat: no-repeat;
+    background-size:auto;
+  
+
+  }
+
+  </style>  
+</head>
+
+<body class="h-screen font-sans login bg-cover">
+<div class="container mx-auto h-full flex flex-1 justify-center items-center">
+  <div class="w-full max-w-lg">
+    <div class="leading-loose">
+      <form class="max-w-xl m-4 p-10 bg-white rounded shadow-xl" method="post">
+        <p class="text-gray-800 font-medium text-center text-lg font-bold">Login Here</p>
+        <div class="form-group block" style="display:block-flex; width:100%; text-align: center;">
+        
+            {{ form|crispy }}
+            {% csrf_token %}
+          
+       
+
+        <div class="mt-4 items-center justify-between">
+          <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit">Login</button>
+          <a class="inline-block right-0 align-baseline  font-bold text-sm text-500 hover:text-blue-800" href="#">
+            Forgot Password?
+          </a>
+        </div>  Not registered ?
+        <a class="inline-block right-0 align-baseline font-bold text-sm text-500 hover:text-blue-800" href="{% url 'user-registration' %}">
+         Sign Up Now
+        </a>
+         </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+</body>
+
+</html>
