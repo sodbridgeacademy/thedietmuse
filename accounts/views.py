@@ -149,6 +149,9 @@ class FoodOrdersCreateView(LoginRequiredMixin, CreateView):
 class FoodOrdersDetailView(DetailView):
 	model = FoodOrder
 
+class FoodMenuDetailView(DetailView):
+	model = Food
+
 class FoodOrderUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 	model = FoodOrder
 	fields = ['order_status', 'payment_status']

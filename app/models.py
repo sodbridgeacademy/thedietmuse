@@ -108,10 +108,10 @@ class Gallery(models.Model):
 class FoodOrder(models.Model):
     menu = models.ForeignKey(Food, related_name='my_food_order', on_delete=models.CASCADE)
     date_needed = models.DateField(help_text=u'Day you need this order')
-    no_of_plates = models.CharField(max_length=100)
-    message = models.TextField(blank=True)
+    no_of_plates = models.CharField(max_length=100, help_text=u'How many many guest(s) owns this order?')
+    message = models.TextField(blank=True, help_text=u'Any special message you want us to know for this order?')
     user = models.ForeignKey(User, related_name='users', on_delete=models.CASCADE, null=True)
-    delivery_address = models.TextField(default='Ondo')
+    delivery_address = models.TextField(default='Ondo', help_text=u'Please enter the street address also.')
     order_status = models.CharField(max_length=50, choices=order_delivery_status, blank=True, default='Received')
     payment_status = models.CharField(max_length=50, choices=order_payment_status, blank=True, default='Pending')
     total_cost = models.DecimalField(max_digits=10, null=True, decimal_places=2)
