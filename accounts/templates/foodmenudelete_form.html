@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<main class="bg-transparent bg-side-nav  flex-1 p-3 overflow-hidden">
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline" href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline" href="#">Menu {{ object.id }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page"> <span class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">Delete</span></li>
+      </ol>
+    </nav>
+
+    <div class="flex flex-col">
+      <!--Grid Form-->
+        <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2">
+            <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
+                <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b">
+                    Delete This Menu
+                </div>
+
+                <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2 w-full max-w-lg">
+                  <form class="form-sample" method="POST">
+                    <p class="card-description">
+                     Proceed to delete? OR Cancel if you don't want to delete.
+                    </p>
+                    <div class="row">
+                      <div class="col-md-12">
+
+                        <div class="form-group row">
+                          <div class="col-sm-9">
+                            {{ form|crispy }}
+                            {% csrf_token %}
+                            <div class="text-center">
+                              <button class="btn btn-outline-danger" type="submit">Delete</button>
+                                <hr><a href="{% url 'food-menu' %}" class="btn btn-outline-primary">Cancel</a>
+                            </div> 
+                          </div>
+                        </div>
+                      </div>                      
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+  </main>
+
+{% endblock content %}

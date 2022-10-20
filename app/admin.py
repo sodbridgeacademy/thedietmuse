@@ -28,3 +28,12 @@ class FoodOrderAdmin(admin.ModelAdmin):
     list_display = ['user', 'date_needed', 'no_of_plates', 'message', 'payment_status', 'total_cost', 'delivery_address', \
     'date_created']
     list_filter = ['date_created', 'menu', 'user']
+
+@admin.register(Gallery)
+class GalleryAdmin(admin.ModelAdmin):
+    list_display = ['name', 'image', 'date_added']
+
+@admin.register(Testimonial) 
+class TestimonialAdmin(admin.ModelAdmin):
+    list_display = ['name', 'profession', 'image', 'testimony', 'date_added']
+

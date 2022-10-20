@@ -21,7 +21,7 @@ class ProfileUpdateForm(forms.ModelForm):
 class FoodOrderUpdateForm(forms.ModelForm):
 	class Meta:
 		model = FoodOrder
-		fields = ['menu', 'no_of_plates','delivery_address', 'user', 'order_status', 'payment_status']
+		fields = ['menu', 'no_of_plates','delivery_address', 'order_status', 'payment_status']
 
 class FoodMenuUpdateForm(forms.ModelForm):
 	class Meta:

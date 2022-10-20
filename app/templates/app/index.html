@@ -68,7 +68,7 @@
           <li><a class="nav-link scrollto" href="#testimonials">Testimonials</a></li>
           <li><a class="nav-link scrollto" href="#gallery">Gallery</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'dashboard' %}">Track Order</a></li> 
+          <li><a class="nav-link scrollto" href="{% url 'order-history' %}">Track Order</a></li> 
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -176,7 +176,7 @@
           <p>Check Our Tasty Menu</p>
         </div>
 
-        <!-- <div class="row" data-aos="fade-up" data-aos-delay="100">
+         <!-- <div class="row" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-12 d-flex justify-content-center">
             <ul id="menu-flters">
               <li data-filter="*" class="filter-active">All</li>
@@ -185,13 +185,13 @@
               <li data-filter=".filter-specialty">Specialty</li>
             </ul>
           </div>
-        </div> -->
+        </div>  -->
         <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
           {% for menu in food_menu %}
           <div class="col-lg-6 menu-item filter-starters">
-            <img src="{% static 'assets/img/menu/lobster-bisque.jpg' %}" class="menu-img" alt="">
+            <img src="{{ menu.image.url }}" class="menu-img" width="50px" height="50px" alt="menu images">
             <div class="menu-content">
-              <a href="#">{{ menu.name }}</a><span>N{{ menu.price }}</span>
+              <a href="{% url 'menu-detail' menu.id %}">{{ menu.name }}</a><span>N{{ menu.price }}</span>
             </div>
             <div class="menu-ingredients">
               {{ menu.category }}
@@ -229,7 +229,7 @@
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
                     <h3>{{ special }}</h3>
-                    <p class="fst-italic">{{ special.description }}.</p>
+                    <p class="fst-italic">{{ special.description }}</p>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
                     <img style="height:200px; width:200px; border-radius: 50%;" src="{{ special.image.url }}" alt="specials picture" class="img-fluid">
@@ -276,82 +276,8 @@
           <div class="swiper-pagination"></div>
         </div>
       </div>
-    </section><!-- End Events Section -->
-
-    <!-- DEMO FORM -->
-  <!--   <div>
-      <form action="" method="post">
-        {% csrf_token %}
-        <div class="row">
-                <div class="col-md-6 form-group">
-                  <input type="text" class="form-control" name="name" id="" placeholder="Your Name" required>
-                </div>
-                <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="" placeholder="Your Email" required>
-                </div>
-              </div>
-              <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="" placeholder="Subject" required>
-              </div>
-              <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="8" placeholder="Message" required></textarea>
-              </div>
-              <input type="submit"  value="Submit Info" name="">
-        
-      </form>
-    </div> -->
-
-    <!-- ======= Book A Table Section ======= -->
-    <!-- <section id="make-an-order" class="book-a-table">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Reservation</h2>
-          <p>Make an Order</p>
-        </div>
-
-        <form action="{% url 'reservation' %}" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
-          <div class="row">
-            <div class="col-lg-4 col-md-6 form-group">
-              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-              <div class="validate"></div>
-            </div>
-            <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
-              <div class="validate"></div>
-            </div>
-            <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-              <input type="text" class="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-              <div class="validate"></div>
-            </div>
-            <div class="col-lg-4 col-md-6 form-group mt-3">
-              <input type="text" name="date" class="form-control" id="date" placeholder="Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-              <div class="validate"></div>
-            </div>
-            <div class="col-lg-4 col-md-6 form-group mt-3">
-              <input type="time" class="form-control" name="time" id="time" placeholder="Time" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-              <div class="validate"></div>
-            </div>
-            <div class="col-lg-4 col-md-6 form-group mt-3">
-              <input type="number" class="form-control" name="people" id="people" placeholder="# of people" data-rule="minlen:1" data-msg="Please enter at least 1 chars">
-              <div class="validate"></div>
-            </div>
-          </div>
-          <div class="form-group mt-3">
-            <textarea class="form-control" name="message" rows="5" placeholder="Message"></textarea>
-            <div class="validate"></div>
-          </div>
-          <div class="mb-3">
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Your booking request was sent. We will call back or send an Email to confirm your reservation. Thank you!</div>
-          </div>
-          <div class="text-center"><button class="btn btn-outline-primary" type="submit">Make an Order</button></div>
-        </form>
-
-      </div>
-    </section> -->
-    <!-- End Book A Table Section -->
+    </section>
+    <!-- End Events Section -->    
 
     <!-- ======= Testimonials Section ======= -->
     <section id="testimonials" class="testimonials section-bg">
@@ -364,66 +290,27 @@
 
         <div class="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay="100">
           <div class="swiper-wrapper">
-
+            {% for t in testimonials %}
             <div class="swiper-slide">
               <div class="testimonial-item">
                 <p>
                   <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  The Diet Muse services are top notch. They have a great customer service.
+                  {{ t.testimony }}
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
-                <img src="{% static 'assets/img/testimonials/testimonials-1.jpg' %}" class="testimonial-img" alt="">
-                <h3>Damilare</h3>
-                <h4>CEO Sodbridge Academy</h4>
+                <img src="{{ t.image.url }}" class="testimonial-img" style="height:100px;" alt="testifiers image">
+                <h3>{{ t.name }}</h3>
+                <h4>{{ t.profesion }}</h4>
               </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  I like the food, especially the finger foods. It was really nice and tasty. I'll definitely come back for more.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="{% static 'assets/img/testimonials/testimonials-2.jpg' %}" class="testimonial-img" alt="">
-                <h3>Olabanjo</h3>
-                <h4>Software Developer</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  I was really amazed with the speed and organization with their delivery. I had ordered and was given the date and time I wanted my order. The delivery arrived even before the time given. 
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="{% static 'assets/img/testimonials/testimonials-3.jpg' %}" class="testimonial-img" alt="">
-                <h3>James</h3>
-                <h4>Store Owner</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  The diet muse is one food is one I'll always recommend; anytime, anyday!
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="{% static 'assets/img/testimonials/testimonials-5.jpg' %}" class="testimonial-img" alt="">
-                <h3>Deji Ojo</h3>
-                <h4>Entrepreneur & student</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
+            </div>
+            <!-- End testimonial item -->
+            {% endfor %}
           </div>
           <div class="swiper-pagination"></div>
         </div>
-
       </div>
-    </section><!-- End Testimonials Section -->
+    </section>
+    <!-- End Testimonials Section -->
 
     <!-- ======= Gallery Section ======= -->
     <section id="gallery" class="gallery">
@@ -431,82 +318,27 @@
       <div class="container" data-aos="fade-up">
         <div class="section-title">
           <h2>Gallery</h2>
-          <p>Some photos from Our Restaurant</p>
+          <p>Some Photos From Our Restaurant</p>
         </div>
       </div>
 
       <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
 
         <div class="row g-0">
-
+          {% for g in gallery %}
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="{% static 'assets/img/gallery/gallery-1.jpg' %}" class="gallery-lightbox" data-gall="gallery-item">
-                <img src="{% static 'assets/img/gallery/gallery-1.jpg' %}" alt="" class="img-fluid">
+              <a href="{{ g.image.url }}" class="gallery-lightbox" data-gall="gallery-item">
+                <img src="{{ g.image.url }}" alt="Gallery Image" style="display:flex; padding:8px; width:100%; height:200px"  class="img-fluid">
               </a>
             </div>
           </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="{% static 'assets/img/gallery/gallery-2.jpg' %}" class="gallery-lightbox" data-gall="gallery-item">
-                <img src="{% static 'assets/img/gallery/gallery-2.jpg' %}" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="{% static 'assets/img/gallery/gallery-3.jpg' }" class="gallery-lightbox" data-gall="gallery-item">
-                <img src="{% static 'assets/img/gallery/gallery-3.jpg' }" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="{% static 'assets/img/gallery/gallery-4.jpg' }" class="gallery-lightbox" data-gall="gallery-item">
-                <img src="{% static 'assets/img/gallery/gallery-4.jpg' }" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="{% static 'assets/img/gallery/gallery-5.jpg' }" class="gallery-lightbox" data-gall="gallery-item">
-                <img src="{% static 'assets/img/gallery/gallery-5.jpg' }" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="{% static 'assets/img/gallery/gallery-6.jpg' }" class="gallery-lightbox" data-gall="gallery-item">
-                <img src="{% static 'assets/img/gallery/gallery-6.jpg' }" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="{% static 'assets/img/gallery/gallery-7.jpg' }" class="gallery-lightbox" data-gall="gallery-item">
-                <img src="{% static 'assets/img/gallery/gallery-7.jpg' }" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="{% static 'assets/img/gallery/gallery-8.jpg' }" class="gallery-lightbox" data-gall="gallery-item">
-                <img src="{% static 'assets/img/gallery/gallery-8.jpg' }" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
+          {% endfor %}
         </div>
-
       </div>
-    </section><!-- End Gallery Section -->
+    </section>
+    <!-- End Gallery Section -->
+
 
     <!-- ======= Chefs Section ======= -->
    <!--  <section id="chefs" class="chefs">
@@ -587,15 +419,12 @@
           <p>Contact Us</p>
         </div>
       </div>
-
        <div data-aos="fade-up">
         <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>
       </div>
-
       <div class="container" data-aos="fade-up">
 
         <div class="row mt-5">
-
           <div class="col-lg-4">
             <div class="info">
               <div class="open-hours">
@@ -621,9 +450,6 @@
                 <h4>Email:</h4>
                 <p><a href="mailto: bookthedietmuse@gmail.com">bookthedietmuse@gmail.com</a></p>
               </div>
-
-              
-
             </div>
           </div>
           <div class="col-lg-4">
@@ -667,7 +493,8 @@
         </div>
 
       </div>
-    </section><!-- End Contact Section -->
+    </section>
+    <!-- End Contact Section -->
 
   </main><!-- End #main -->
 
@@ -742,7 +569,7 @@
               <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#about">About us</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#specials">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i><a href="{% url 'user-login' %}">Track Order</a></li>
+              <li><i class="bx bx-chevron-right"></i><a href="{% url 'order-history' %}">Track Order</a></li>
 <!--               <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li> -->
             </ul>
           </div>
@@ -761,7 +588,7 @@
           <div class="col-lg-4 col-md-6 footer-newsletter">
             <h4>Our Newsletter</h4>
             <p>Subscribe to our newsletter to enjoy discounts and promos!</p>
-            <form action="" method="post">
+            <form action="" method="">
               <input type="email" name="email"><input type="submit" value="Subscribe">
             </form>
           </div>
@@ -772,7 +599,7 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright 2022 <strong><span>The DietMuse</span></strong>. All Rights Reserved
+        &copy; Copyright <span id="date" ></span> <strong><span>The DietMuse</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
         Designed by <a href="https://sodbrideacademy.com/solutions">Sodbridge Solutions</a>
@@ -793,6 +620,14 @@
 
   <!-- Main JS File -->
   <script src="{% static 'assets/js/main.js' %}"></script>
+  <script src="{% static 'assets/js/todolist.js' %}"></script>
+  <script>
+    dt = new Date();
+    var year = dt.getFullYear();
+    document.getElementById('date').innerHTML = year
+    console.log('Current Year: ', year)
+  </script>
+
 
 </body>
 

@@ -3,7 +3,6 @@
 
 <!doctype html>
 <html lang="en">
-
 <head>
   <title>The Diet Muse|Login</title>
   <meta charset="utf-8">
@@ -11,13 +10,12 @@
   <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
     crossorigin="anonymous">
+  <link rel="shortcut icon" href="{% static 'images/dietmusenew.png' %}" />
   <style>
   .login{
     background: url("/static/images/dietmusenew.png");  
-    background-repeat: no-repeat;
+    background-repeat: round;
     background-size:auto;
-  
-
   }
 
   </style>  
@@ -27,14 +25,12 @@
 <div class="container mx-auto h-full flex flex-1 justify-center items-center">
   <div class="w-full max-w-lg">
     <div class="leading-loose">
-      <form class="max-w-xl m-4 p-10 bg-white rounded shadow-xl" method="post">
+      <form class="max-w-xl m-4 p-10 bg-white rounded shadow-xl w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" method="post">
         <p class="text-gray-800 font-medium text-center text-lg font-bold">Login Here</p>
         <div class="form-group block" style="display:block-flex; width:100%; text-align: center;">
         
+            {% csrf_token %}    
             {{ form|crispy }}
-            {% csrf_token %}
-          
-       
 
         <div class="mt-4 items-center justify-between">
           <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit">Login</button>
@@ -52,5 +48,4 @@
   </div>
 </div>
 </body>
-
 </html>

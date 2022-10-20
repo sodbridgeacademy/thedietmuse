@@ -39,3 +39,12 @@ $(document).ready(function(){
    });
      
 });
+
+today = new Date();
+var year = today.getFullYear();
+var month = today.getMonth();
+var day = today.getDate()
+
+document.getElementById('date').innerHTML = year
+
+console.log('Current Year: ', year)

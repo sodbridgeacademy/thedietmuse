@@ -96,7 +96,8 @@ class Specials(models.Model):
 
 class Gallery(models.Model):
     name = models.CharField(max_length=200, db_index=True)
-    image = models.ImageField(upload_to='events/',blank=True)
+    image = models.ImageField(upload_to='gallery/',blank=True)
+    date_added = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ('name',)
@@ -104,18 +105,31 @@ class Gallery(models.Model):
     def __str__(self):
         return self.name
 
+class Testimonial(models.Model):
+    name = models.CharField(max_length=200, db_index=True)
+    image = models.ImageField(upload_to='testimonial/',blank=True)
+    testimony = models.CharField(max_length=100, blank=True)
+    profession = models.CharField(max_length=50, blank=True)
+    date_added = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('name',)
+
+    def __str__(self):
+        return str(self.name) + str(self.testimony)
+
 
 class FoodOrder(models.Model):
-    menu = models.ForeignKey(Food, related_name='my_food_order', on_delete=models.CASCADE)
-    date_needed = models.DateField(help_text=u'Day you need this order')
-    no_of_plates = models.CharField(max_length=100, help_text=u'How many many guest(s) owns this order?')
+    menu = models.ForeignKey(Food, related_name='my_food_order', on_delete=models.CASCADE, help_text=u'Select meal.')
+    date_needed = models.DateField(help_text=u'Date you need this order: dd/mm/yy')
+    no_of_plates = models.CharField(max_length=100, help_text=u'How many many guest(s) owns this meal?')
     message = models.TextField(blank=True, help_text=u'Any special message you want us to know for this order?')
     user = models.ForeignKey(User, related_name='users', on_delete=models.CASCADE, null=True)
-    delivery_address = models.TextField(default='Ondo', help_text=u'Please enter the street address also.')
+    delivery_address = models.TextField(default='Ondo', help_text=u'Please enter the full address for easy delivery.')
     order_status = models.CharField(max_length=50, choices=order_delivery_status, blank=True, default='Received')
     payment_status = models.CharField(max_length=50, choices=order_payment_status, blank=True, default='Pending')
     total_cost = models.DecimalField(max_digits=10, null=True, decimal_places=2)
-    order_id = models.CharField(max_length=20, blank=True, default='no order id yet')
+    order_id = models.CharField(max_length=50, blank=True, default='no order id yet')
     date_created = models.DateTimeField(auto_now=True)
 
     class Meta:

@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.urls import reverse
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import LogoutView, LoginView, login_required
 from django.core.paginator import Paginator, EmptyPage,PageNotAnInteger
@@ -11,6 +11,12 @@ from django.contrib import messages
 from app.models import FoodOrder, Food
 from .models import Profile
 from datetime import datetime
+
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+
+
 import time
 today = datetime.today()
 day = today.day
@@ -22,9 +28,8 @@ class UserRegistrationView(CreateView):
 	form_class = UserCreationForm
 	template_name = 'user_registration.html'
 
-	def get_success_url(self):
-		return reverse('index')
-
+	# def get_success_url(self):
+	# 	return reverse('dashboard')
 
 class UserLoginView(LoginView):
 	 template_name = 'login.html'
@@ -32,10 +37,15 @@ class UserLoginView(LoginView):
 @login_required
 def dashboard(request):
 	current_user = request.user
-	print('current_user from dashboard:', current_user.first_name)
+	my_orders = FoodOrder.objects.all()
+	delivered_orders = FoodOrder.objects.filter(order_status='Delivered').filter(user=current_user).count()
+	pending_orders = FoodOrder.objects.filter(order_status='Received').filter(user=current_user).count() 
+	rejected_orders = FoodOrder.objects.filter(order_status='Rejected').filter(user=current_user).count()
+	print('pending_orders:', pending_orders)
 	food_menu = Food.objects.all()
-	context = {'food_menu': food_menu, 'current_user':current_user}
-	return render(request, 'customer_dashboard.html', context)
+	context = {'food_menu': food_menu, 'current_user':current_user, 'my_orders':my_orders, 
+		'delivered_orders':delivered_orders, 'pending_orders':pending_orders, 'rejected_orders':rejected_orders}
+	return render(request, 'dashboard.html', context)
 
 @login_required
 def view_orders(request):
@@ -50,7 +60,7 @@ def view_orders(request):
 
 	# Pagination
 	page = request.GET.get('page')
-	paginator = Paginator(customer_orders, 5)
+	paginator = Paginator(customer_orders, 10)
 	try:
 		customer_orders = paginator.page(page)
 	except PageNotAnInteger:
@@ -89,6 +99,15 @@ def food_menu(request):
 	food_menu = Food.objects.all()
 	context = {'food_menu': food_menu}
 	return render(request, 'food_menu.html', context)
+
+class FoodMenuDetailView(DetailView):
+	model = Food
+
+class FoodMenuDeleteView(DeleteView):
+	model = Food
+
+	def get_success_url(self):
+		return reverse('food-menu')
 
 class FoodMenuUpdateView(LoginRequiredMixin, UpdateView):
 	model = Food
@@ -145,14 +164,10 @@ class FoodOrdersCreateView(LoginRequiredMixin, CreateView):
         form.instance.order_id = self.order_id
         return super().form_valid(form)
 
-
 class FoodOrdersDetailView(DetailView):
 	model = FoodOrder
 
-class FoodMenuDetailView(DetailView):
-	model = Food
-
-class FoodOrderUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class FoodOrderUpdateView(LoginRequiredMixin, UpdateView):
 	model = FoodOrder
 	fields = ['order_status', 'payment_status']
 	exclude = ['user']
@@ -160,14 +175,18 @@ class FoodOrderUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 	def form_valid(self, form):
 		self.admin = User.objects.get(username='gabby')
 		print('Inside FoodOrder UpdateView:', self.admin)
-		form.instance.user  = request.user
+		form.instance.user = self.request.user
 		return super().form_valid(form)
 
 	#test function to make only an authorised user update a post
+	'''
 	def test_func(self):
 		food_order = self.get_object()
 		self.admin_user = admin
 		admin = User.objects.get(username='gabby')
 		if self.request.user == admin:
 			return True
-		return False
+		return False '''
+
+def password_reset_request(request):
+	pass

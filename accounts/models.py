@@ -16,7 +16,7 @@ class Profile(models.Model):
 		)
 	user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
 	dob = models.DateField(blank=True, null=True)
-	photo = models.ImageField(upload_to='users/', default='media/default.jpeg', blank=True)
+	photo = models.ImageField(upload_to='users', default='default.jpeg', blank=True)
 	gender = models.CharField(max_length=100, choices=gender, default='Please Select')
 	category = models.CharField(max_length=100, choices=category, blank=True, default='Choose category')
 	street_address = models.CharField(max_length=200, blank=True)

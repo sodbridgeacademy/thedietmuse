@@ -31,6 +31,7 @@
                             <th class="border w-1/7 px-4 py-2">Cost</th>
                             <th class="border w-1/7 px-4 py-2">Customer</th>
                             <th class="border w-1/7 px-4 py-2">Transaction ID</th>
+                            <th class="border w-1/7 px-4 py-2">Order Status</th>
                             <th class="border w-1/7 px-4 py-2">Payment Status</th>
                             <th class="border w-1/7 px-4 py-2">Date of Order</th>
                           </tr>
@@ -43,7 +44,17 @@
                                 <td class="border px-4 py-2">{{ history.menu }}</td>
                                 <td class="border px-4 py-2"> N{{ history.menu.price }}</td>
                                 <td class="border px-4 py-2">{{ history.user }}</td>
-                                <td class="border px-4 py-2">{{ history.order_id }}</td> 
+                                <td class="border px-4 py-2">{{ history.order_id }}</td>
+                                {% if history.order_status == 'Received' %}
+                                  <td class="border px-4 py-2" style="color:blue;">Received</td>
+                                {% elif history.order_status == 'Incoming' %}
+                                  <td class="border px-4 py-2" style="color:paleturquoise;">Incoming</td>
+                                {% elif history.order_status == 'Delivered' %}
+                                  <td class="border px-4 py-2" style="color:green;">Delivered</td>
+                                {% else %}
+                                <td class="border px-4 py-2" style="color:orangered;">Rejected</td>
+                                {% endif %}
+
                                 {% if history.payment_status == 'Pending' %}
                                   <td class="border px-4 py-2" style="color:yellow;">Pending</td>
                                 {% elif history.payment_status == 'Refunded' %}
@@ -52,6 +63,7 @@
                                 <td class="border px-4 py-2" style="color:green;">Received</td>
                                 {% endif %}
                                 <td class="border px-4 py-2">{{ history.date_created|date:'M d, Y' }}</td>
+                                
                                 
                             </tr>
                               {% endif %}

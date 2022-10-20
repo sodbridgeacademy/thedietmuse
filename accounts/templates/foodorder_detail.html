@@ -37,10 +37,10 @@
        {% endif %}
      </li> <hr>
       <li><b>Transaction ID:</b> {{ object.order_id }}</li> <hr>
+      <li><b>Total Order Cost:</b><span style="color:green"> N{{ object.total_cost }}</span></li> <hr>
       <li><b>Order Date:</b> {{ object.date_created }} </li> <hr>
-      <a href="https://paystack.com/pay/thedietmuse" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 btn-block btn-primary">
+      <a href="https://paystack.com/pay/thedietmuse" target="_blank" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 btn-block btn-primary">
       Proceed to Payment
-      <!-- <svg aria-hidden="true" class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> -->
       </a>
       
       
@@ -50,129 +50,4 @@
   </div>
 </main>
 <!--/Main-->
-
-  
-
-
-
 {% endblock content %}
-
-        <!-- <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2">
-            <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
-                <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b">
-                    Food Detail
-                </div>
-
-                <div class="p-6">
-                  <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                      <a href="#">
-                          <img class="rounded-t-lg" src="{{ object.image.url }}" width="100%" alt="food image">
-                      </a>
-                      <div class="p-5">
-                          <a href="#">
-                              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ object.name }}</h5>
-                          </a> <hr>
-                          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ object.description }}.
-                            <hr><b>Day:</b> {{ object.day }}
-                            <hr><b>Availability:</b> {% if object.available == True %} <span style="color:green">In stock</span>{% else %}
-                            <span style="color:red">Out of stock</span>{% endif %} <hr> <b>Category:</b> {{ object.category }} <hr>
-                              <b>Price:</b>  N{{ object.price }} <hr> <b>Return Policy:</b> {{ object.return_policy }} <hr>
-                          </p> 
-                          {% if user.username != 'gabby' %}
-                          <a href="{% url 'make-order' %}" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 btn-block btn-primary">
-                             Make an order for this meal
-                              <!-- <svg aria-hidden="true" class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> -->
-                          </a>
-                          {% else %}
-                            <b>Date added:</b> {{ object.created }}
-                          {% endif %}
-                      </div>
-                  </div>
-
-                </div>
-
-            </div>
-        </div> -->
-
-<div class="col-12 grid-margin">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">ORDER DETAIL</h4>
-        <form class="form-sample">
-          <p class="card-description">
-            View the details of food order <code> {{ object.id }} </code>
-          </p>
-          <div class="row">
-
-            <!-- Customer Order's History -->
-            <div class="col-lg-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Payment Status:  <code>
-                    <b> 
-                      {% if object.payment_status  == 'Pending' %}
-                        <span style="color:red;">PENDING</span>
-                      {% elif object.payment_status  == 'Received' %}
-                        <span style="color:lightgreen;">RECEIVED</span>
-                      {% elif object.payment_status  == 'Refunded' %}
-                        <span style="color:rosybrown;">REFUNDED</span>
-                      {% endif %}
-                    </b></code></h4> <hr>
-                    <h4 class="card-title">Order Cost: <code>N{{ object.total_cost }}</code></h4>
-                  <div class="table-responsive pt-3">
-                    <table class="table table-bordered">
-                      <thead>
-                        <tr>
-                          <th>
-                            <li>Order Menu: {{ object.menu }}</li>
-                            <li>Order Status:
-                              {% if object.order_status  == 'Received' %}
-                                <span style="color:blue;">Received</span>
-                              {% elif object.payment_status  == 'Incoming' %}
-                                <span style="color:yellow;">Incoming</span>
-                              {% elif object.payment_status  == 'Delivered' %}
-                                <span style="color:green;">Delivered</span>
-                              {% elif object.payment_status  == 'Rejected' %}
-                                <span style="color:red;">Rejected</span>
-                             {% endif %}
-                           </li>
-                            <li>Order Price: N{{ object.menu.price }}</li>
-                            <li>Total Plates: {{ object.no_of_plates }}</li>
-                            <li>Delivery Address: {{ object.delivery_address }}</li>
-                            <li>Order Message: {{ object.message }}</li>
-                            <li>Order ID: {{ object.order_id }}</li>
-                            <li>Order Date: {{ object.date_created }} </li>
-                          </th>
-
-                         
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            {% if request.user.username == 'gabby' %}
-                              <a href="{% url 'confirm-payment' object.pk %}" class="btn btn-block btn-primary">Confirm Payment</a>
-                            {% endif %}
-                            {% if object.payment_status == 'Received' %}
-                              Payment Received
-                            {% else %}
-                              <a href="https://paystack.com/pay/thedietmuse" target="_blank" class="btn btn-block btn-primary">Proceed to payment</a>
-                            {% endif %}
-                          </td>
-                         </tr>
-                    
-                    
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-                 
-          </div>
-          
-        </form>
-      </div>
-    </div>
-  </div>
