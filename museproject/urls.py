@@ -6,7 +6,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from accounts.views import UserRegistrationView, UserLoginView, dashboard, FoodOrdersCreateView, FoodOrdersDetailView, password_reset_request, \
     food_menu, order_history, profile_update, view_orders, FoodOrderUpdateView, FoodMenuUpdateView, FoodMenuDetailView, FoodMenuDeleteView
-from django.contrib.auth.views import LogoutView, PasswordChangeView, PasswordChangeDoneView, PasswordResetDoneView, \
+from django.contrib.auth.views import LogoutView, PasswordChangeView, PasswordChangeDoneView, PasswordResetView, PasswordResetDoneView,\
     PasswordResetConfirmView, PasswordResetCompleteView
 
 urlpatterns = [
@@ -38,10 +38,10 @@ urlpatterns = [
     path('password_change/done/', PasswordChangeDoneView.as_view(template_name='password_change_done.html'), name='password_change_done'),
 
     # reset password urls
-    path("password_reset", password_reset_request, name="password_reset"),
+    path('password_reset/', PasswordResetView.as_view(template_name='password/password_reset_form.html'), name='password_reset'),
     path('password_reset/done/', PasswordResetDoneView.as_view(template_name='password/password_reset_done.html'), name='password_reset_done'),
-    path('reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(template_name="password/password_reset_confirm.html"), name='password_reset_confirm'),
-    path('reset/done/', PasswordResetCompleteView.as_view(template_name='password/password_reset_complete.html'), name='password_reset_complete'),  
+    path('reset/<uidb64>/<token>/',PasswordResetConfirmView.as_view(template_name="password/password_reset_confirm.html"), name='password_reset_confirm'),
+    path('reset/done/', PasswordResetCompleteView.as_view(template_name='password/password_reset_complete.html'),name='password_reset_complete'),
 
     ]
 if settings.DEBUG:

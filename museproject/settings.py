@@ -26,6 +26,8 @@ ALLOWED_HOSTS = ['*', 'thedietmuse.herokuapp.com', 'localhost', '127.0.0.1']
 # EMAIL_USE_SSL = False
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 
 # Application definition
 INSTALLED_APPS = [

@@ -5,13 +5,19 @@ from django.urls import reverse
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import LogoutView, LoginView, login_required
+
 from django.core.paginator import Paginator, EmptyPage,PageNotAnInteger
 from .forms import UserUpdateForm, ProfileUpdateForm, FoodMenuUpdateForm
 from django.contrib import messages
+
 from app.models import FoodOrder, Food
 from .models import Profile
-from datetime import datetime
 
+from datetime import datetime
+from django.db.models.query_utils import Q
+from django.template.loader import render_to_string
+from django.core.mail import send_mail, BadHeaderError
+from django.contrib.auth.forms import PasswordResetForm
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
@@ -27,9 +33,6 @@ year = today.year
 class UserRegistrationView(CreateView):
 	form_class = UserCreationForm
 	template_name = 'user_registration.html'
-
-	# def get_success_url(self):
-	# 	return reverse('dashboard')
 
 class UserLoginView(LoginView):
 	 template_name = 'login.html'
@@ -51,6 +54,13 @@ def dashboard(request):
 def view_orders(request):
 	customer_orders = FoodOrder.objects.all()
 	total_customer_orders = customer_orders.count()
+	total_orders = FoodOrder.objects.all().count()
+	pending_orders = FoodOrder.objects.filter(order_status='Received').count()
+	delivered_orders = FoodOrder.objects.filter(order_status='Delivered').count()
+	incoming_orders = FoodOrder.objects.filter(order_status='Incoming').count()
+	rejected_orders = FoodOrder.objects.filter(order_status='Rejected').count() 
+	total_customers = User.objects.all().count()
+	total_customers = total_customers - 1
 	init_order_cost = 0
 	for p in customer_orders:
 		total_costs = p.menu.price
@@ -69,7 +79,8 @@ def view_orders(request):
 		customer_orders = paginator.page(paginator.num_pages)
 
 	context = {'customer_orders':customer_orders, 'total_customer_orders':total_customer_orders, \
-	'total_customer_order_costs':total_customer_order_costs}
+	'total_customer_order_costs':total_customer_order_costs, 'pending_orders':pending_orders, 'delivered_orders':delivered_orders, \
+	'total_customers':total_customers, 'incoming_orders':incoming_orders, 'total_orders':total_orders, 'rejected_orders':rejected_orders}
 	return render(request, 'view_orders.html', context)
 
 @login_required
@@ -189,4 +200,29 @@ class FoodOrderUpdateView(LoginRequiredMixin, UpdateView):
 		return False '''
 
 def password_reset_request(request):
-	pass
+	if request.method == "POST":
+		passwordreset_form = PasswordResetForm(request.POST)
+		if passwordreset_form.is_valid():
+			data = passwordreset_form.cleaned_data['email']
+			associated_users = User.objects.filter(Q(email=data))
+			if associated_users.exists():
+				for user in associated_users:
+					subject = "Password Reset Requested"
+					email_template_name = "password/password_reset_email.txt"
+					c = {
+					"email":user.email,
+					'domain':'127.0.0.1:8008',
+					'site_name': 'The Diet Muse',
+					"uid": urlsafe_base64_encode(force_bytes(user.pk)).decode(),
+					"user": user,
+					'token': default_token_generator.make_token(user),
+					'protocol': 'http',
+					}
+					email = render_to_string(email_template_name, c)
+					try:
+						send_mail(subject, email, 'sdamilare420@gmail.com' , [user.email], fail_silently=False)
+					except BadHeaderError:
+						return HttpResponse('Invalid header found.')
+					return redirect ("password_reset_done")
+	password_reset_form = PasswordResetForm()
+	return render(request=request, template_name="password/passwordreset_form.html", context={"password_reset_form":password_reset_form})

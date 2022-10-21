@@ -121,7 +121,7 @@ class Testimonial(models.Model):
 
 class FoodOrder(models.Model):
     menu = models.ForeignKey(Food, related_name='my_food_order', on_delete=models.CASCADE, help_text=u'Select meal.')
-    date_needed = models.DateField(help_text=u'Date you need this order: dd/mm/yy')
+    date_needed = models.DateField(help_text=u'Date you need this order: mm/dd/yy')
     no_of_plates = models.CharField(max_length=100, help_text=u'How many many guest(s) owns this meal?')
     message = models.TextField(blank=True, help_text=u'Any special message you want us to know for this order?')
     user = models.ForeignKey(User, related_name='users', on_delete=models.CASCADE, null=True)

@@ -3,8 +3,6 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-
-
  <!--Main-->
 <main class="bg-white-500 flex-1 p-3 overflow-hidden">
 
@@ -28,16 +26,20 @@
                     <table class="table-fixed">
                         <thead>
                           <tr>
-                            <th class="border-b bg-black text-white w-1/4 px-4 py-2">Total Orders</th>
+                          <!--   <th class="border-b bg-black text-white w-1/4 px-4 py-2">Total Orders</th>
+ -->                        <th class="border-b bg-black text-white w-1/4 px-4 py-2">Outgoing Orders</th>
                             <th class="border-b bg-black text-white w-1/4 px-4 py-2">Pending Orders</th>
-                            <th class="border-b bg-black text-white w-1/4 px-4 py-2">Total Order Cost</th>
+                            <th class="border-b bg-black text-white w-1/4 px-4 py-2">Delivered Orders</th>
+                            <th class="border-b bg-black text-white w-1/4 px-4 py-2">Rejected Orders</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
-                            <td class="border-b bg-blue-400 text-white px-4 py-2">{{ total_customer_orders }}</td>
-                            <td class="border-b bg-yellow-400 text-white px-4 py-2">XXXXXX</td>
-                            <td class="border-b bg-red-400 text-white px-4 py-2">N{{ total_customer_order_costs }}</td>
+                            <!-- <td class="border-b bg-blue-400 text-white px-4 py-2"></td>
+ -->                            <td class="border-b bg-green-400 text-white px-4 py-2">{{ incoming_orders }}</td>
+                            <td class="border-b bg-yellow-400 text-white px-4 py-2">{{ pending_orders }}</td>
+                            <td class="border-b bg-blue-400 text-white px-4 py-2">{{ delivered_orders }} </td>
+                            <td class="border-b bg-red-400 text-white px-4 py-2">{{ rejected_orders }} </td>
                           </tr>
                         </tbody>
                     </table>
@@ -54,15 +56,15 @@
                         <thead>
                           <tr>
                             <th class="border-b bg-black text-white w-1/4 px-4 py-2">Total Customers</th>
-                            <th class="border-b bg-black text-white w-1/4 px-4 py-2">Total Customer Delivery</th>
-                            <th class="border-b bg-black text-white w-1/4 px-4 py-2">Last Customer</th>
+                            <th class="border-b bg-black text-white w-1/4 px-4 py-2">Total Cust. Orders </th>
+                            <th class="border-b bg-black text-white w-1/4 px-4 py-2">Total Cust. Order Cost</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
-                            <td class="border-b bg-green-400 text-white px-4 py-2">YYYYYY</td>
-                            <td class="border-b bg-blue-400 text-white px-4 py-2">YYYYY</td>
-                            <td class="border-b bg-gray-400 text-white px-4 py-2">Unknown</td>
+                            <td class="border-b bg-green-400 text-white px-4 py-2">{{ total_customers }}</td>
+                            <td class="border-b bg-blue-400 text-white px-4 py-2">{{ total_customer_orders }}</td>
+                            <td class="border-b bg-gray-400 text-white px-4 py-2">N{{ total_customer_order_costs }}</td>
                           </tr>
                         </tbody>
                     </table>
@@ -76,7 +78,7 @@
         <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2">
             <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
                 <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b">
-                    Order Details
+                    Order Details: (<b>Total Orders:{{ total_orders }}</b>)
                 </div>
                 <div class="p-3">
                     <table class="table-responsive w-full rounded">
@@ -139,8 +141,29 @@
             </div>
         </div>
         <!--/Grid Form-->
+
+            <!-- Pagination -->
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a class = "btn btn-outline-info mb-4"href="?page=1">First</a>
+            <a class = "btn btn-outline-info mb-4"href="?page={{ page_obj.previous_page_number }}">Prev</a>
+        {% endif %}
+        <!-- To get links to a few pages before & after your current -->
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <a class = "btn btn-info mb-4"href="?page={{ num }}">{{ num }}</a>
+                <!-- If current page number is between 3 prev and next pages, print it out -->
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a class = "btn btn-outline-info mb-4"href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <a class = "btn btn-outline-info mb-4"href="?page={{ page_obj.next_page_number }}">Next</a>
+                <a class = "btn btn-outline-info mb-4"href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+            {% endif %}     
+    {% endif %}
+    <!-- End Pagination -->
     </div>
 </main>
 <!--/Main-->
 {% endblock content %}
-
