@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-f$3$=i63%@ddwkcnl8on5=vlm&wyeqo&8@!%6e0f3l(e1!j^fq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', 'dietmuse-env.eba-6nksmzmi.us-west-2.elasticbeanstalk.com', 'localhost', 'thedietmuse.click', 'www.thedietmuse.click']
+ALLOWED_HOSTS = ['*', 'thedietmuse.railway.appcom', 'localhost', 'thedietmuse.click', 'www.thedietmuse.click']
 
 #gmail smtp
 # EMAIL_HOST = 'smtp.gmail.com'
@@ -128,7 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static'
-STATICFILES_DIR = BASE_DIR / "static/"
+#STATICFILES_DIR = BASE_DIR / "static/"
 
 #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
