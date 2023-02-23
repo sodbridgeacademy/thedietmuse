@@ -41,11 +41,13 @@ INSTALLED_APPS = [
     'accounts',
     'app',
     'crispy_forms',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware', 
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -96,6 +98,7 @@ DATABASES = {
     }
 } 
 
+CSRF_TRUSTED_ORIGINS = ['https://thedietmuse.click']
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
