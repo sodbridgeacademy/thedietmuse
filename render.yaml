@@ -1,6 +1,6 @@
 databases:
   - name: museproject
-    databaseName: db.sqlite3
+    databaseName: sqlite3
     user: museproject
 
 
