@@ -16,7 +16,7 @@ urlpatterns = [
     # sign up/in urls
     path('accounts/signup/', UserRegistrationView.as_view(), name='user-registration'),
     path('accounts/login/', UserLoginView.as_view(), name='user-login'),
-    path('logout/', LogoutView.as_view(template_name='logout.html',next_page=None), name = 'logout'),
+    path('logout/', LogoutView.as_view(template_name='app/index.html',next_page=None), name = 'logout'),
 
     # user prodile urls
     path('user-profile/',dashboard, name='dashboard'),

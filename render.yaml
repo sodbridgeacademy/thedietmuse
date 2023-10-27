@@ -1,0 +1,33 @@
+databases:
+  - name: museproject
+    databaseName: db.sqlite3
+    user: museproject
+
+
+services:
+  # A simle python web service
+  - type: web
+    name: museproject
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn mysite.wsgi:application"
+
+
+    #repo: https://github.com/render-examples/webdis.git # optional
+    #region: oregon # optional (defaults to oregon)
+    #plan: standard # optional (defaults to starter instance type)
+    #branch: master # optional (defaults to master)
+    # envVars:
+    #   - key: REDIS_HOST
+    #     fromService:
+    #       type: redis
+    #       name: lightning
+    #       property: host # available properties are listed below
+    #   - key: REDIS_PORT
+    #     fromService:
+    #       type: redis
+    #       name: lightning
+    #       property: port
+    #   - fromGroup: conc-settings
+
+  
