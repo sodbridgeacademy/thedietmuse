@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-f$3$=i63%@ddwkcnl8on5=vlm&wyeqo&8@!%6e0f3l(e1!j^fq
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['*', 'web-production-2e12.up.railway.app', 'localhost', 'thedietmuse.click', 'www.thedietmuse.click']
+ALLOWED_HOSTS = ['*', '.vercel.app', 'web-production-2e12.up.railway.app', 'localhost', 'thedietmuse.click', 'www.thedietmuse.click']
 
 #gmail smtp
 # EMAIL_HOST = 'smtp.gmail.com'
